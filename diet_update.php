@@ -12,11 +12,11 @@ $snack = $_POST['snack'];
 // include("functions.php");
 $pdo = connect_to_db();
 
-$sql = "UPDATE diet_table SET weight=:weight, snack=:snack,
+$sql = "UPDATE diet_table SET weight=:weight, snack_flag=:snack_flag,
  updated_at=sysdate() WHERE id=:id";
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':weight', $weight, PDO::PARAM_INT);
-$stmt->bindValue(':snack', $snack, PDO::PARAM_INT);
+$stmt->bindValue(':snack_flag', $snack_flag, PDO::PARAM_INT);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 
