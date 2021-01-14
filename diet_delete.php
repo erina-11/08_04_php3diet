@@ -1,10 +1,13 @@
 <?php
 // var_dump($_GET);
 // exit();
+session_start(); // セッションの開始
+include('functions.php'); // 関数ファイル読み込み
+check_session_id(); // idチェック関数の実行
 
 $id = $_GET['id'];
 
-include('functions.php');
+// include('functions.php');
 $pdo = connect_to_db();
 
 $sql = 'DELETE FROM diet_table WHERE id =:id';

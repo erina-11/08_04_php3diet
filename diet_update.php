@@ -1,12 +1,15 @@
 <?php
 // var_dump($_POST);
 // exit();
+session_start(); // セッションの開始
+include('functions.php'); // 関数ファイル読み込み
+check_session_id(); // idチェック関数の実行
 
 $id = $_POST['id'];
 $weight = $_POST['weight'];
 $snack = $_POST['snack'];
 
-include("functions.php");
+// include("functions.php");
 $pdo = connect_to_db();
 
 $sql = "UPDATE diet_table SET weight=:weight, snack=:snack,

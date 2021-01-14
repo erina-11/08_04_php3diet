@@ -2,11 +2,13 @@
 
 // var_dump($_GET);
 // exit();
-
+session_start(); // セッションの開始
+include('functions.php'); // 関数ファイル読み込み
+check_session_id(); // idチェック関数の実行
 // 送信されたidをgetで受け取る
 $id = $_GET['id'];
 // 関数ファイル読み込み
-include("functions.php");
+// include("functions.php");
 // DB接続&id名でテーブルから検索
 $pdo = connect_to_db();
 $sql = 'SELECT * FROM diet_table WHERE id=:id';
