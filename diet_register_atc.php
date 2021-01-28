@@ -6,18 +6,23 @@
 // 関数ファイル読み込み
 include('functions.php');
 
+// DB接続関数
+$pdo = connect_to_db();
+
 // データ受け取り
 $username = $_POST["username"];
 $password = $_POST["password"];
 
-// DB接続関数
-$pdo = connect_to_db();
 
 // ユーザ存在有無確認
-$sql = 'SELECT COUNT(*) FROM users_table WHERE username=:username';
+$sql = 'SELECT COUNT(*) FROM users_table
+WHERE username=:username
+AND password=:password
+AND is_deleted=0';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+$stmt->bindValue(':password', $password, PDO::PARAM_STR);
 $status = $stmt->execute();
 
 if ($status == false) {
@@ -38,8 +43,11 @@ if ($stmt->fetchColumn() > 0) {
 // ユーザ登録SQL作成
 // `created_at`と`updated_at`には実行時の`sysdate()`関数を用いて実行時の日時を入力する
 $sql = 'INSERT INTO users_table(id, username, password, is_admin, is_deleted, created_at, updated_at) VALUES(NULL, :username, :password, 0, 0, sysdate(), sysdate())';
-
+// $sql = 'INSERT INTO diet_table(d_users_id) VALUES(NULL)'; //試しに入れてみた
 // SQL準備&実行
+// var_dump($sql);
+// exit();
+
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':username', $username, PDO::PARAM_STR);
 $stmt->bindValue(':password', $password, PDO::PARAM_STR);

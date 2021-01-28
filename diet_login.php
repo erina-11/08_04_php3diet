@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 
+<!-- ログイン情報（id pwd）を入力して送信 -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -1,5 +1,7 @@
 <?php
 
+//ここはデータを作成するファイルで、画面はない
+
 session_start(); // セッションの開始
 include('functions.php'); // 関数ファイル読み込み
 check_session_id(); // idチェック関数の実行
@@ -22,6 +24,7 @@ $pdo = connect_to_db(); // 関数実行
 // `created_at`と`updated_at`には実行時の`sysdate()`関数を用いて実行時の日時を入力する
 $sql = 'INSERT INTO diet_table(id, weight, snack_flag, created_at, updated_at)
 VALUES(NULL, :weight, :snack_flag, sysdate(), sysdate())';
+
 // SQL準備&実行
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':weight', $weight, PDO::PARAM_INT);

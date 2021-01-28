@@ -1,3 +1,9 @@
+<?php
+session_start(); // セッションの開始
+include('functions.php'); // 関数ファイル読み込み
+check_session_id(); // idチェック関数の実行
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -30,6 +36,7 @@
         <fieldset>
             <legend>DB連携型DIET管理（入力画面）</legend>
             <a href="diet_read.php">一覧画面</a>
+            <a href="todo_logout.php">logout</a>
             <div>
                 weight: <input type="number" name="weight">
             </div>

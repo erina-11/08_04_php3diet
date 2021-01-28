@@ -1,14 +1,22 @@
 <?php
-
 session_start(); // セッションの開始
 include('functions.php'); // 関数ファイル読み込み
 check_session_id(); // idチェック関数の実行
-// include('functions.php'); // 関数を記述したファイルの読み込み
 
+// DB接続
 $pdo = connect_to_db(); // 関数実行
 
+// ユーザid取得 今ログインしてるの誰だっけ
+$user_id = $_SESSION['id'];
+
+
+
 // データ取得SQL作成
-$sql = 'SELECT * FROM diet_table';
+// $sql = 'SELECT * FROM diet_table';
+$sql = 'SELECT * FROM diet_table
+ LEFT OUTER JOIN (SELECT weight_id, COUNT(id) AS cnt
+ FROM like2_table GROUP BY weight_id) AS likes
+ ON diet_table.id = likes.weight_id';
 
 // SQL準備&実行
 $stmt = $pdo->prepare($sql);
@@ -34,6 +42,8 @@ if ($status == false) {
         // var_dump($output);
         // exit();
         // edit deleteリンクを追加
+        $output .= "<td>
+       <a href='like_create.php?user_id={$user_id}&weight_id={$record["id"]}'>like{$record["cnt"]}</a><td>";
         $output .= "<td>
        <a href='diet_edit.php?id={$record["id"]}'>edit</a>
        </td>";

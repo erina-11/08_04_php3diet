@@ -45,14 +45,14 @@ if ($status == false) {
             <div>
                 weight: <input type="number" name="weight" value="<?= $record["weight"] ?>">
             </div>
-            <input type="hidden" name="id" value="<?= $record['id'] ?>">
+
             <div>
                 snack: <label><input type="radio" checked name="snack" value="1">〇</label>
                 <label><input type="radio" name="snack" value="0">✕</label>
                 <div>
                     <button>submit</button>
                 </div>
-
+                <input type="hidden" name="id" value="<?= $record['id'] ?>">
         </fieldset>
     </form>
 
